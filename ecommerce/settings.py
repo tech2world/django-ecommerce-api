@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -135,4 +136,12 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Token valid for 1 hour
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Refresh token valid for 1 day
+    'ROTATE_REFRESH_TOKENS': True,                 # Issue a new refresh token with each refresh
+    'BLACKLIST_AFTER_ROTATION': True,              # Blacklist old refresh tokens
+    'AUTH_HEADER_TYPES': ('Bearer',),              # Expect 'Bearer' in the Authorization header
 }
